@@ -1,6 +1,6 @@
 Visualizing Starwars characters
 ================
-Add your name
+Cami Ciesielski
 
 ### Glimpse at the starwars data frame.
 
@@ -10,27 +10,27 @@ glimpse(starwars)
 
     ## Rows: 87
     ## Columns: 14
-    ## $ name       <chr> "Luke Skywalker", "C-3PO", "R2-D2", "Darth Vader", "Leia Or~
-    ## $ height     <int> 172, 167, 96, 202, 150, 178, 165, 97, 183, 182, 188, 180, 2~
-    ## $ mass       <dbl> 77.0, 75.0, 32.0, 136.0, 49.0, 120.0, 75.0, 32.0, 84.0, 77.~
-    ## $ hair_color <chr> "blond", NA, NA, "none", "brown", "brown, grey", "brown", N~
-    ## $ skin_color <chr> "fair", "gold", "white, blue", "white", "light", "light", "~
-    ## $ eye_color  <chr> "blue", "yellow", "red", "yellow", "brown", "blue", "blue",~
-    ## $ birth_year <dbl> 19.0, 112.0, 33.0, 41.9, 19.0, 52.0, 47.0, NA, 24.0, 57.0, ~
-    ## $ sex        <chr> "male", "none", "none", "male", "female", "male", "female",~
-    ## $ gender     <chr> "masculine", "masculine", "masculine", "masculine", "femini~
-    ## $ homeworld  <chr> "Tatooine", "Tatooine", "Naboo", "Tatooine", "Alderaan", "T~
-    ## $ species    <chr> "Human", "Droid", "Droid", "Human", "Human", "Human", "Huma~
-    ## $ films      <list> <"The Empire Strikes Back", "Revenge of the Sith", "Return~
-    ## $ vehicles   <list> <"Snowspeeder", "Imperial Speeder Bike">, <>, <>, <>, "Imp~
-    ## $ starships  <list> <"X-wing", "Imperial shuttle">, <>, <>, "TIE Advanced x1",~
+    ## $ name       <chr> "Luke Skywalker", "C-3PO", "R2-D2", "Darth Vader", "Leia Or…
+    ## $ height     <int> 172, 167, 96, 202, 150, 178, 165, 97, 183, 182, 188, 180, 2…
+    ## $ mass       <dbl> 77.0, 75.0, 32.0, 136.0, 49.0, 120.0, 75.0, 32.0, 84.0, 77.…
+    ## $ hair_color <chr> "blond", NA, NA, "none", "brown", "brown, grey", "brown", N…
+    ## $ skin_color <chr> "fair", "gold", "white, blue", "white", "light", "light", "…
+    ## $ eye_color  <chr> "blue", "yellow", "red", "yellow", "brown", "blue", "blue",…
+    ## $ birth_year <dbl> 19.0, 112.0, 33.0, 41.9, 19.0, 52.0, 47.0, NA, 24.0, 57.0, …
+    ## $ sex        <chr> "male", "none", "none", "male", "female", "male", "female",…
+    ## $ gender     <chr> "masculine", "masculine", "masculine", "masculine", "femini…
+    ## $ homeworld  <chr> "Tatooine", "Tatooine", "Naboo", "Tatooine", "Alderaan", "T…
+    ## $ species    <chr> "Human", "Droid", "Droid", "Human", "Human", "Human", "Huma…
+    ## $ films      <list> <"The Empire Strikes Back", "Revenge of the Sith", "Return…
+    ## $ vehicles   <list> <"Snowspeeder", "Imperial Speeder Bike">, <>, <>, <>, "Imp…
+    ## $ starships  <list> <"X-wing", "Imperial shuttle">, <>, <>, "TIE Advanced x1",…
 
 ### Modify the following plot to change the color of all points to `"pink"`.
 
 ``` r
 ggplot(starwars, 
        aes(x = height, y = mass, color = gender, size = birth_year)) +
-  geom_point(color = "#30509C")
+  geom_point(color = "pink")
 ```
 
     ## Warning: Removed 51 rows containing missing values (geom_point).
@@ -44,10 +44,10 @@ ggplot(starwars,
        aes(x = height, y = mass, color = gender, size = birth_year)) +
   geom_point(color = "#30509C") +
   labs(
-    #title = "___",
-    #x = "___", 
-    #y = "___",
-    #___
+    title = "Starwars Character's Height and Weight by Birth Year",
+    x = "Weight (kg)", 
+    y = "Height (cm)",
+    size = "Birth Year"
     )
 ```
 
@@ -65,16 +65,73 @@ or remove the `eval` option altogether since it’s set to `TRUE` by
 default.)
 
 ``` r
-ggplot(starwars, aes(___)) +
-  geom___
+ggplot(starwars, aes(x = eye_color)) +
+  geom_bar(color = "black")
 ```
+
+![](starwars_files/figure-gfm/barplot-1.png)<!-- -->
 
 ### Pick a single numerical variable and make a histogram of it.
 
 (This time no starter code is provided, you’re on your own!)
 
+``` r
+ggplot(starwars, aes(x = height)) +
+  geom_histogram(binwidth = 30) +
+  labs(x = "Height (cm)")
+```
+
+    ## Warning: Removed 6 rows containing non-finite values (stat_bin).
+
+![](starwars_files/figure-gfm/histogram-1.png)<!-- -->
+
 ### Pick a numerical variable and a categorical variable and make a visualisation (you pick the type!) to visualise the relationship between the two variables. Along with your code and output, provide an interpretation of the visualisation.
+
+``` r
+ggplot(starwars, aes(x = gender, y = height)) + 
+  geom_boxplot() +
+  labs(
+    title = "Height of Starwars Characters as a Function of Gender",
+    x = "Gender",
+    y = "Height (cm)"
+  )
+```
+
+    ## Warning: Removed 6 rows containing non-finite values (stat_boxplot).
+
+![](starwars_files/figure-gfm/num-cat-1.png)<!-- -->
 
 ### Pick two categorical variables and make a visualisation to visualise the relationship between the two variables. Along with your code and output, provide an interpretation of the visualisation.
 
+``` r
+ggplot(starwars, aes(x = gender, fill = eye_color)) + 
+  geom_bar() +
+  labs(
+    x = "Gender", 
+    size = "Eye Color",
+  )
+```
+
+![](starwars_files/figure-gfm/cat-cat-1.png)<!-- --> The graph suggests
+that majority of the masculine and feminine characters have blue or
+brown eyes. More masculine characters have yellow eyes than the feminine
+characters. The graph also shows that there are more masculine
+characters than feminine.
+
 ### Pick two numerical variables and two categorical variables and make a visualisation that incorportes all of them and provide an interpretation with your answer.
+
+``` r
+ggplot(starwars, aes(x = mass, y = height, color = sex)) + geom_point() +
+  facet_grid(~gender) +
+  labs(
+  title = "Height and Weight of Starwars Characters", 
+  subtitle = "as colored by sex and separated by gender",
+  x = "Weight (kg)",
+  y = "Height (cm)",
+  size = "Sex",
+) 
+```
+
+    ## Warning: Removed 28 rows containing missing values (geom_point).
+
+![](starwars_files/figure-gfm/multi-1.png)<!-- -->

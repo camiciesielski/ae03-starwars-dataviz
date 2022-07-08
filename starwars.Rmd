@@ -1,6 +1,6 @@
 ---
 title: "Visualizing Starwars characters"
-author: "Add your name"
+author: "Cami Ciesielski"
 output: github_document
 ---
 
@@ -19,7 +19,7 @@ glimpse(starwars)
 ```{r scatterplot}
 ggplot(starwars, 
        aes(x = height, y = mass, color = gender, size = birth_year)) +
-  geom_point(color = "#30509C")
+  geom_point(color = "pink")
 ```
 
 ### Add labels for title, x and y axes, and size of points. Uncomment to see the effect.
@@ -29,10 +29,10 @@ ggplot(starwars,
        aes(x = height, y = mass, color = gender, size = birth_year)) +
   geom_point(color = "#30509C") +
   labs(
-    #title = "___",
-    #x = "___", 
-    #y = "___",
-    #___
+    title = "Starwars Character's Height and Weight by Birth Year",
+    x = "Weight (kg)", 
+    y = "Height (cm)",
+    size = "Birth Year"
     )
 ```
 
@@ -40,9 +40,9 @@ ggplot(starwars,
 
 (A little bit of starter code is provided below, and the code chunk is set to not be evaluated with `eval = FALSE` because the current code in there is not valid code and hence the document wouldn't knit. Once you replace the code with valid code, set the chunk option to `eval = TRUE`, or remove the `eval` option altogether since it's set to `TRUE` by default.)
 
-```{r barplot, eval = FALSE}
-ggplot(starwars, aes(___)) +
-  geom___
+```{r barplot}
+ggplot(starwars, aes(x = eye_color)) +
+  geom_bar(color = "black")
 ```
 
 ### Pick a single numerical variable and make a histogram of it.
@@ -50,23 +50,45 @@ ggplot(starwars, aes(___)) +
 (This time no starter code is provided, you're on your own!)
 
 ```{r histogram}
-
+ggplot(starwars, aes(x = height)) +
+  geom_histogram(binwidth = 30) +
+  labs(x = "Height (cm)")
 ```
 
 ### Pick a numerical variable and a categorical variable and make a visualisation (you pick the type!) to visualise the relationship between the two variables. Along with your code and output, provide an interpretation of the visualisation.
 
 ```{r num-cat}
-
+ggplot(starwars, aes(x = gender, y = height)) + 
+  geom_boxplot() +
+  labs(
+    title = "Height of Starwars Characters as a Function of Gender",
+    x = "Gender",
+    y = "Height (cm)"
+  )
 ```
 
 ### Pick two categorical variables and make a visualisation to visualise the relationship between the two variables. Along with your code and output, provide an interpretation of the visualisation.
 
 ```{r cat-cat}
-
+ggplot(starwars, aes(x = gender, fill = eye_color)) + 
+  geom_bar() +
+  labs(
+    x = "Gender", 
+    size = "Eye Color",
+  )
 ```
+The graph suggests that majority of the masculine and feminine characters have blue or brown eyes. More masculine characters have yellow eyes than the feminine characters. The graph also shows that there are more masculine characters than feminine.  
 
 ### Pick two numerical variables and two categorical variables and make a visualisation that incorportes all of them and provide an interpretation with your answer.
 
 ```{r multi}
-
+ggplot(starwars, aes(x = mass, y = height, color = sex)) + geom_point() +
+  facet_grid(~gender) +
+  labs(
+  title = "Height and Weight of Starwars Characters", 
+  subtitle = "as colored by sex and separated by gender",
+  x = "Weight (kg)",
+  y = "Height (cm)",
+  size = "Sex",
+) 
 ```
